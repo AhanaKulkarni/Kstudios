@@ -23,13 +23,48 @@
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-accent-gold);
+  color: var(--color-text-primary);
 }
 
-.nav-logo {
-  height: 40px;
-  width: auto;
-  display: block;
+.css-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.css-logo-k {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.css-logo-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.css-logo-studios {
+  font-family: var(--font-sans);
+  font-size: 1.2rem;
+  letter-spacing: 0.4em;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  line-height: 1;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid var(--color-accent-gold);
+  margin-bottom: 0.2rem;
+}
+
+.css-logo-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.45rem;
+  letter-spacing: 0.2em;
+  font-weight: 500;
+  color: var(--color-text-secondary);
 }
 
 .nav-links {
@@ -242,9 +277,8 @@
   font-family: var(--font-sans);
 }
 
-/* Process Timeline - Horizontal Scroll */
+/* Process Timeline - Responsive Layout */
 .process-pin-wrap {
-  height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -252,24 +286,36 @@
 
 .process-scroll-wrap {
   padding: 0 var(--container-padding);
+  width: 100%;
 }
 
 .process-timeline-horizontal {
   display: flex;
-  gap: 4rem;
-  width: max-content;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
 }
 
 .process-step-horizontal {
-  width: 400px;
+  width: 100%;
   position: relative;
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .process-pin-wrap {
+    height: 100vh;
+  }
+  
+  .process-timeline-horizontal {
+    flex-direction: row;
+    gap: 4rem;
+    width: max-content;
+  }
+
   .process-step-horizontal {
-    width: 300px;
+    width: 400px;
   }
 }
 
@@ -554,17 +600,24 @@
 
 .modal-content {
   position: relative;
-  width: 90%;
+  width: 95%;
   max-width: 800px;
   max-height: 90vh;
   overflow-y: auto;
-  padding: 4rem 3rem;
+  padding: 3rem 1.5rem;
   border-radius: 1.5rem;
   transform: translateY(30px) scale(0.95);
   transition: transform 0.4s var(--ease-out-expo);
   background: rgba(20, 20, 20, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    width: 90%;
+    padding: 4rem 3rem;
+  }
 }
 
 .modal-overlay:not(.hidden) .modal-content {

@@ -171,36 +171,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Process Timeline Horizontal Scroll Animation
+  // Process Timeline Scroll Animation
   const processPinWrap = document.querySelector('.process-pin-wrap');
   const processScrollWrap = document.querySelector('.process-scroll-wrap');
   
   if (processPinWrap && processScrollWrap) {
-    let scrollWidth = processScrollWrap.scrollWidth - window.innerWidth + 100; // Adding buffer
-    
-    gsap.to(processScrollWrap, {
-      x: () => -scrollWidth,
-      ease: "none",
-      scrollTrigger: {
-        trigger: processPinWrap,
-        pin: true,
-        scrub: 1,
-        start: "center center",
-        end: () => "+=" + scrollWidth,
-        invalidateOnRefresh: true
-      }
+    let mm = gsap.matchMedia();
+
+    // Desktop: Horizontal Scroll
+    mm.add("(min-width: 768px)", () => {
+      let scrollWidth = processScrollWrap.scrollWidth - window.innerWidth + 100;
+      
+      gsap.to(processScrollWrap, {
+        x: () => -scrollWidth,
+        ease: "none",
+        scrollTrigger: {
+          trigger: processPinWrap,
+          pin: true,
+          scrub: 1,
+          start: "center center",
+          end: () => "+=" + scrollWidth,
+          invalidateOnRefresh: true
+        }
+      });
+
+      gsap.from('.process-step-horizontal', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: processPinWrap,
+          start: "top 70%",
+        }
+      });
     });
 
-    gsap.from('.process-step-horizontal', {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.2,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: processPinWrap,
-        start: "top 70%",
-      }
+    // Mobile: Vertical Stack (No pinning, just fade up)
+    mm.add("(max-width: 767px)", () => {
+      gsap.from('.process-step-horizontal', {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: processPinWrap,
+          start: "top 80%",
+        }
+      });
     });
   }
 

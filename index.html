@@ -17,9 +17,9 @@
   <body>
     <!-- Custom Cursor -->
     <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <div class="cursor-outline"><span class="cursor-text"></span></div>
 
-    <!-- Navigation -->
+
     <nav class="nav">
       <div class="container nav-container">
         <div class="logo">
@@ -36,8 +36,15 @@
           <a href="#projects">Work</a>
           <a href="#process">Process</a>
           <a href="#pricing">Pricing</a>
+          <a href="#faq">FAQ</a>
         </div>
-        <a href="https://wa.me/918928352406?text=Hey%20K-Studios,%20I%20want%20to%20build%20a%20website" target="_blank" class="btn btn-primary btn-sm">Let's Talk</a>
+        <div class="nav-actions">
+          <a href="https://wa.me/918928352406?text=Hey%20K-Studios,%20I%20want%20to%20build%20a%20website" target="_blank" class="btn btn-primary btn-sm mr-4">Let's Talk</a>
+          <button class="nav-toggle" aria-label="Toggle menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
       </div>
     </nav>
 
@@ -58,9 +65,22 @@
             K- Studios creates animated, immersive and AI-powered digital experiences for modern brands, startups and creators.
           </p>
           <div class="hero-cta mt-10">
-            <button class="btn btn-primary magnetic-btn mr-4">View Projects</button>
-            <a href="https://wa.me/918928352406?text=Hey%20K-Studios,%20I%20want%20to%20build%20a%20website" target="_blank" class="btn btn-outline magnetic-btn inline-flex">Start Your Project</a>
+            <a href="#projects" class="btn btn-primary magnetic-btn mr-4">View Projects</a>
+            <a href="#pricing" class="btn btn-outline magnetic-btn inline-flex">Start Your Project</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+      <div class="container">
+        <span class="trust-title">Trusted By Innovative Brands</span>
+        <div class="logo-grid">
+          <span class="trust-logo">AetherBuilt</span>
+          <span class="trust-logo">TechAI</span>
+          <span class="trust-logo">TCET EDIC</span>
+          <span class="trust-logo">Ram Industries</span>
         </div>
       </div>
     </section>
@@ -119,11 +139,61 @@
             <span class="tag">AI • Startup • UI/UX • Motion Design</span>
             <h3 class="heading-3 mt-4">Aetheron AI</h3>
             <p class="mt-4">A futuristic AI company website designed to communicate modular intelligence, automation systems, and next-generation technology through immersive visual storytelling.</p>
-            <button class="btn btn-outline mt-8 case-study-btn" data-project="aetheron-ai">View Case Study</button>
+            <div class="project-buttons mt-8">
+              <button class="btn btn-outline case-study-btn mr-4" data-project="aetheron-ai">View Case Study</button>
+              <a href="https://aetheronai.in" target="_blank" class="btn btn-primary btn-sm">View Live</a>
+            </div>
           </div>
           <div class="project-visual">
             <div class="mockup-container glass">
-              <div class="mockup-img placeholder-img">Aetheron AI Mockup</div>
+              <div class="mockup-window aetheron-mockup">
+                <div class="window-header">
+                  <div class="header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="header-address">aetheronai.in</div>
+                </div>
+                <div class="window-content">
+                  <div class="aetheron-grid">
+                    <div class="mock-sidebar">
+                      <div class="sidebar-logo">Æ</div>
+                      <div class="sidebar-menu">
+                        <span class="menu-item active">✦</span>
+                        <span class="menu-item">◈</span>
+                        <span class="menu-item">✧</span>
+                        <span class="menu-item">⟡</span>
+                      </div>
+                    </div>
+                    <div class="mock-main">
+                      <div class="main-header">
+                        <h3>Neural Agent V4</h3>
+                        <span class="status-badge">Online</span>
+                      </div>
+                      <div class="chat-feed">
+                        <div class="chat-msg user">Optimize cloud infrastructure latency.</div>
+                        <div class="chat-msg bot">
+                          <span class="bot-prefix">Aetheron:</span> Initializing optimizer... <br/>
+                          - Rerouting DNS tables (12ms) <br/>
+                          - Latency optimized by <span class="highlight">34.2%</span>.
+                        </div>
+                        <div class="chat-msg bot typing">System idle. Ready...<span class="caret">|</span></div>
+                      </div>
+                      <div class="stats-row">
+                        <div class="stat-card">
+                          <span class="stat-label">Accuracy</span>
+                          <span class="stat-value">99.8%</span>
+                        </div>
+                        <div class="stat-card">
+                          <span class="stat-label">Latency</span>
+                          <span class="stat-value text-accent">8ms</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -134,11 +204,63 @@
             <span class="tag">SaaS • Product Design • Motion • UX</span>
             <h3 class="heading-3 mt-4">AetherBuilt OS</h3>
             <p class="mt-4">A cinematic operating-system inspired landing page created for a factory intelligence platform with sleek transitions, modular layouts and immersive product storytelling.</p>
-            <button class="btn btn-outline mt-8 case-study-btn" data-project="aetherbuilt-os">View Case Study</button>
+            <div class="project-buttons mt-8">
+              <button class="btn btn-outline case-study-btn mr-4" data-project="aetherbuilt-os">View Case Study</button>
+              <a href="https://aether-built-website.vercel.app/" target="_blank" class="btn btn-primary btn-sm">View Live</a>
+            </div>
           </div>
           <div class="project-visual">
             <div class="mockup-container glass">
-              <div class="mockup-img placeholder-img">AetherBuilt OS Mockup</div>
+              <div class="mockup-window aetherbuilt-mockup">
+                <div class="window-header">
+                  <div class="header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="header-address">aetherbuilt.os</div>
+                </div>
+                <div class="window-content">
+                  <div class="os-grid">
+                    <div class="os-header">
+                      <span class="os-title">AetherBuilt OS [v1.0.4]</span>
+                      <div class="os-time">19:30:02</div>
+                    </div>
+                    <div class="os-body">
+                      <div class="os-sidebar">
+                        <div class="sidebar-sec">SYSTEM</div>
+                        <span class="tree-item active">core.cpp</span>
+                        <span class="tree-item">telemetry.log</span>
+                        <div class="sidebar-sec mt-4">SENSORS</div>
+                        <span class="tree-item">Reactor 1 [Active]</span>
+                        <span class="tree-item alert">Reactor 2 [Warn]</span>
+                      </div>
+                      <div class="os-dashboard">
+                        <div class="db-charts">
+                          <div class="chart-container">
+                            <span class="chart-title">TEMPS</span>
+                            <div class="mock-chart bar-chart">
+                              <div class="chart-bar" style="height: 40%"></div>
+                              <div class="chart-bar warning" style="height: 85%"></div>
+                              <div class="chart-bar" style="height: 60%"></div>
+                            </div>
+                          </div>
+                          <div class="chart-container">
+                            <span class="chart-title">RATIO</span>
+                            <div class="circle-chart-container">
+                              <div class="circle-chart">92%</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="console-box">
+                          <span class="con-line warning">[WARN] Reactor 2 Core temp high.</span>
+                          <span class="con-line success">[OK] Efficiency stabilizer active (98.4%).</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -149,11 +271,53 @@
             <span class="tag">Industry • Corporate • Branding • Website</span>
             <h3 class="heading-3 mt-4">Ram Industries</h3>
             <p class="mt-4">A modern industrial showcase website built to transform a traditional manufacturing company into a more premium and technologically advanced digital brand.</p>
-            <button class="btn btn-outline mt-8 case-study-btn" data-project="ram-industries">View Case Study</button>
+            <div class="project-buttons mt-8">
+              <button class="btn btn-outline case-study-btn mr-4" data-project="ram-industries">View Case Study</button>
+              <a href="https://ram-industries-showcase-bo72iu0uq.vercel.app/" target="_blank" class="btn btn-primary btn-sm">View Live</a>
+            </div>
           </div>
           <div class="project-visual">
             <div class="mockup-container glass">
-              <div class="mockup-img placeholder-img">Ram Industries Mockup</div>
+              <div class="mockup-window ram-mockup">
+                <div class="window-header">
+                  <div class="header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="header-address">ram-industries.com</div>
+                </div>
+                <div class="window-content">
+                  <div class="ram-layout">
+                    <div class="ram-nav">
+                      <span class="ram-logo">RAM IND</span>
+                      <div class="ram-nav-links">
+                        <span class="active">Systems</span>
+                      </div>
+                    </div>
+                    <div class="ram-hero">
+                      <div class="ram-hero-info">
+                        <span class="ram-tag">MANUFACTURING</span>
+                        <h2>Mechanical Operations</h2>
+                      </div>
+                    </div>
+                    <div class="ram-specs">
+                      <div class="spec-col">
+                        <span class="spec-label">Level</span>
+                        <span class="spec-val">4.0</span>
+                      </div>
+                      <div class="spec-col">
+                        <span class="spec-label">Steel/day</span>
+                        <span class="spec-val">12k T</span>
+                      </div>
+                      <div class="spec-col">
+                        <span class="spec-label">Carbon</span>
+                        <span class="spec-val text-green">-18%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -164,11 +328,57 @@
             <span class="tag">Education • Innovation • Startup Ecosystem</span>
             <h3 class="heading-3 mt-4">TCET EDIC</h3>
             <p class="mt-4">An entrepreneurship and innovation platform designed for TCET EDIC to centralize startup initiatives, student engagement, mentorship systems and innovation-driven activities.</p>
-            <button class="btn btn-outline mt-8 case-study-btn" data-project="tcet-edic">View Case Study</button>
+            <div class="project-buttons mt-8">
+              <button class="btn btn-outline case-study-btn mr-4" data-project="tcet-edic">View Case Study</button>
+              <a href="https://edic-new.vercel.app/" target="_blank" class="btn btn-primary btn-sm">View Live</a>
+            </div>
           </div>
           <div class="project-visual">
             <div class="mockup-container glass">
-              <div class="mockup-img placeholder-img">TCET EDIC Mockup</div>
+              <div class="mockup-window tcet-mockup">
+                <div class="window-header">
+                  <div class="header-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                  </div>
+                  <div class="header-address">edic.tcetmumbai.in</div>
+                </div>
+                <div class="window-content">
+                  <div class="tcet-layout">
+                    <div class="tcet-header">
+                      <span class="tcet-logo">TCET EDIC</span>
+                      <span class="user-badge">Incubator</span>
+                    </div>
+                    <div class="tcet-main">
+                      <div class="tcet-welcome">
+                        <h3>TCET Startup Portal</h3>
+                        <p>Track funding and connect with verified mentors.</p>
+                      </div>
+                      <div class="tcet-cards">
+                        <div class="tcet-card">
+                          <h4>Startups</h4>
+                          <div class="tcet-num">45+</div>
+                        </div>
+                        <div class="tcet-card">
+                          <h4>Sessions</h4>
+                          <div class="tcet-num">180+</div>
+                        </div>
+                      </div>
+                      <div class="tcet-list">
+                        <div class="list-item">
+                          <span>EcoGrid AI</span>
+                          <span class="badge seed">Seed</span>
+                        </div>
+                        <div class="list-item">
+                          <span>BioSphere</span>
+                          <span class="badge idea">Prototype</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -284,7 +494,7 @@
               <li>Basic Animations</li>
               <li>Contact Form Integration</li>
             </ul>
-            <button class="btn btn-outline w-full mt-8">Select Plan</button>
+            <a href="https://wa.me/918928352406?text=Hi%20K-Studios,%20I%20would%20like%20to%20book%20the%20Launch%20Plan%20(₹3,999)." target="_blank" class="btn btn-outline w-full mt-8">Select Plan</a>
           </div>
           
           <div class="pricing-card glass premium">
@@ -297,7 +507,7 @@
               <li>CMS Integration</li>
               <li>Advanced SEO Setup</li>
             </ul>
-            <button class="btn btn-primary w-full mt-8">Select Plan</button>
+            <a href="#estimator" class="btn btn-primary w-full mt-8">Use Estimator</a>
           </div>
           
           <div class="pricing-card glass">
@@ -309,7 +519,157 @@
               <li>Custom WebGL Elements</li>
               <li>Dedicated Support</li>
             </ul>
-            <button class="btn btn-outline w-full mt-8">Select Plan</button>
+            <a href="https://wa.me/918928352406?text=Hi%20K-Studios,%20I'm%20interested%20in%20a%20Signature%20Plan%20project." target="_blank" class="btn btn-outline w-full mt-8">Get Quote</a>
+          </div>
+        </div>
+
+        <!-- Project Estimator widget -->
+        <div class="estimator-container glass mt-24" id="estimator">
+          <h3 class="heading-3 text-center mb-2">Build Your Custom Project</h3>
+          <p class="text-center subtitle mx-auto mb-8">Calculate a real-time price range based on your exact specifications.</p>
+          
+          <div class="estimator-grid">
+            <div class="estimator-controls">
+              <div class="estimator-group">
+                <label>Project Type</label>
+                <div class="estimator-options">
+                  <button class="est-opt active" data-type="landing">Landing Page</button>
+                  <button class="est-opt" data-type="animated">Animated Website</button>
+                  <button class="est-opt" data-type="immersive">3D / Immersive</button>
+                </div>
+              </div>
+              
+              <div class="estimator-group mt-6">
+                <div class="flex-between">
+                  <label>Page Count</label>
+                  <span id="page-count-val" class="text-accent font-bold">1 Page</span>
+                </div>
+                <input type="range" id="page-count" min="1" max="15" value="1" class="slider">
+              </div>
+              
+              <div class="estimator-group mt-6">
+                <label>Features & Integrations</label>
+                <div class="features-checklist mt-2">
+                  <label class="check-item">
+                    <input type="checkbox" id="feat-animations">
+                    <span class="checkmark"></span>
+                    Custom Interactions (GSAP)
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="feat-cms">
+                    <span class="checkmark"></span>
+                    CMS / Admin Panel
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="feat-ai">
+                    <span class="checkmark"></span>
+                    AI Chatbot / Agents
+                  </label>
+                  <label class="check-item">
+                    <input type="checkbox" id="feat-seo" checked disabled>
+                    <span class="checkmark"></span>
+                    SEO & Performance Audit
+                  </label>
+                </div>
+              </div>
+
+              <div class="estimator-group mt-6">
+                <label>Timeline Urgency</label>
+                <div class="timeline-options mt-2">
+                  <button class="est-timeline active" data-time="standard">Standard (4-6 weeks)</button>
+                  <button class="est-timeline" data-time="fast">Fast Track (2 weeks)</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="estimator-summary glass">
+              <div class="summary-header">
+                <h4>Estimate Summary</h4>
+              </div>
+              <div class="summary-details mt-4">
+                <div class="summary-row">
+                  <span>Base Scope</span>
+                  <span id="sum-base">₹3,999</span>
+                </div>
+                <div class="summary-row">
+                  <span>Pages Cost</span>
+                  <span id="sum-pages">₹0</span>
+                </div>
+                <div class="summary-row">
+                  <span>Features Add-on</span>
+                  <span id="sum-features">₹0</span>
+                </div>
+                <div class="summary-row">
+                  <span>Timeline Speed</span>
+                  <span id="sum-timeline">₹0</span>
+                </div>
+                <hr class="summary-divider mt-4 mb-4">
+                <div class="summary-row total">
+                  <span>Estimated Total</span>
+                  <span id="sum-total" class="text-accent">₹3,999</span>
+                </div>
+              </div>
+              <a id="book-calc-btn" href="#" target="_blank" class="btn btn-primary w-full mt-8">Book Project via WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQs SECTION -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <h2 class="heading-2 text-center mb-16">Frequently Asked <span class="text-accent italic">Questions</span></h2>
+        <div class="faq-list mx-auto">
+          <!-- FAQ Item 1 -->
+          <div class="faq-item glass">
+            <button class="faq-question">
+              <span>How long does it take to build a website?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>It varies by scope. A basic Launch landing page takes 1-2 weeks, standard animated sites take 4 weeks, and complex 3D experiences require 6-8 weeks. We align on a detailed roadmap before starting.</p>
+            </div>
+          </div>
+          <!-- FAQ Item 2 -->
+          <div class="faq-item glass">
+            <button class="faq-question">
+              <span>Do I get complete ownership of the code and designs?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, absolutely! Once final payment is completed, you receive 100% intellectual property ownership of the source code, design layouts, and custom assets.</p>
+            </div>
+          </div>
+          <!-- FAQ Item 3 -->
+          <div class="faq-item glass">
+            <button class="faq-question">
+              <span>Can we integrate custom APIs, databases, or AI models?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, we build scalable modular back-end systems. We specialize in API integrations, CMS (Contentful, Sanity), Stripe payments, and custom AI agents/chatbots.</p>
+            </div>
+          </div>
+          <!-- FAQ Item 4 -->
+          <div class="faq-item glass">
+            <button class="faq-question">
+              <span>What is your design and development process like?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>We work in 4 phases: Discover (align on goals), Design (create visual frames), Build (develop clean GSAP code), and Launch (optimizations & deployment). You are involved in reviews at each milestone.</p>
+            </div>
+          </div>
+          <!-- FAQ Item 5 -->
+          <div class="faq-item glass">
+            <button class="faq-question">
+              <span>Do you offer post-launch support and hosting?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes, we set up high-performance hosting on Vercel, Netlify, or AWS and provide monthly support options for site updates, performance audits, and maintenance.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -349,7 +709,7 @@
           <div class="footer-links-grid">
             <div class="footer-col">
               <h4>Socials</h4>
-              <a href="#">Instagram</a>
+              <a href="https://www.instagram.com/k.studio.of.design/" target="_blank">Instagram</a>
               <a href="#">LinkedIn</a>
               <a href="#">Behance</a>
             </div>

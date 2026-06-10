@@ -33,8 +33,14 @@ html.lenis, html.lenis body {
 }
 
 .section {
-  padding: var(--spacing-2xl) 0;
+  padding: 4rem 0;
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
 }
 
 .min-h-screen {
@@ -86,7 +92,18 @@ html.lenis, html.lenis body {
 
 /* Custom Cursor (Optional fallback if JS cursor is slow) */
 body {
-  cursor: default; /* We will use JS for a custom cursor */
+  cursor: default;
+}
+
+/* Hide custom cursor on mobile/touch screens */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-outline {
+    display: none !important;
+  }
+  body {
+    cursor: auto !important;
+  }
 }
 
 /* Utilities */

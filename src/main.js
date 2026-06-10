@@ -34,59 +34,119 @@ gsap.ticker.add((time) => {
 
 gsap.ticker.lagSmoothing(0);
 
-// 2. Custom Cursor
+// 2. Custom Cursor (GSAP hardware accelerated)
 const cursorDot = document.querySelector('.cursor-dot');
 const cursorOutline = document.querySelector('.cursor-outline');
+const cursorText = document.querySelector('.cursor-text');
 
-window.addEventListener('mousemove', (e) => {
-  const posX = e.clientX;
-  const posY = e.clientY;
+if (cursorDot && cursorOutline) {
+  gsap.set(cursorDot, { xPercent: -50, yPercent: -50 });
+  gsap.set(cursorOutline, { xPercent: -50, yPercent: -50 });
 
-  // Dot follows instantly
-  cursorDot.style.left = `${posX}px`;
-  cursorDot.style.top = `${posY}px`;
+  const xToDot = gsap.quickTo(cursorDot, "x", { duration: 0.1, ease: "power3.out" });
+  const yToDot = gsap.quickTo(cursorDot, "y", { duration: 0.1, ease: "power3.out" });
+  
+  const xToOutline = gsap.quickTo(cursorOutline, "x", { duration: 0.35, ease: "power3.out" });
+  const yToOutline = gsap.quickTo(cursorOutline, "y", { duration: 0.35, ease: "power3.out" });
 
-  // Outline follows with slight delay
-  cursorOutline.animate({
-    left: `${posX}px`,
-    top: `${posY}px`
-  }, { duration: 500, fill: "forwards" });
-});
+  window.addEventListener('mousemove', (e) => {
+    xToDot(e.clientX);
+    yToDot(e.clientY);
+    xToOutline(e.clientX);
+    yToOutline(e.clientY);
+  });
 
-// Magnetic Buttons
+  // Magnetic & Hover animations for all links and buttons
+  const hoverables = document.querySelectorAll('a, button, .est-opt, .est-timeline, .faq-question');
+  hoverables.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      gsap.to(cursorOutline, {
+        scale: 1.3,
+        borderColor: 'var(--color-accent-gold)',
+        backgroundColor: 'rgba(203, 168, 106, 0.08)',
+        duration: 0.2
+      });
+      gsap.to(cursorDot, {
+        scale: 0.5,
+        duration: 0.2
+      });
+    });
+
+    el.addEventListener('mouseleave', () => {
+      gsap.to(cursorOutline, {
+        scale: 1,
+        borderColor: 'rgba(203, 168, 106, 0.5)',
+        backgroundColor: 'transparent',
+        duration: 0.2
+      });
+      gsap.to(cursorDot, {
+        scale: 1,
+        duration: 0.2
+      });
+    });
+  });
+
+  // Custom Cursor VIEWS Hover for Project Mockups
+  const mockups = document.querySelectorAll('.mockup-container');
+  mockups.forEach(mockup => {
+    mockup.addEventListener('mouseenter', () => {
+      gsap.to(cursorOutline, {
+        scale: 2,
+        backgroundColor: 'var(--color-accent-gold)',
+        borderColor: 'var(--color-accent-gold)',
+        duration: 0.3
+      });
+      gsap.to(cursorDot, {
+        opacity: 0,
+        duration: 0.2
+      });
+      if (cursorText) {
+        cursorText.textContent = "VIEW";
+        cursorText.style.opacity = 1;
+      }
+    });
+
+    mockup.addEventListener('mouseleave', () => {
+      gsap.to(cursorOutline, {
+        scale: 1,
+        backgroundColor: 'transparent',
+        borderColor: 'rgba(203, 168, 106, 0.5)',
+        duration: 0.3
+      });
+      gsap.to(cursorDot, {
+        opacity: 1,
+        duration: 0.2
+      });
+      if (cursorText) {
+        cursorText.style.opacity = 0;
+      }
+    });
+  });
+}
+
+// Magnetic Buttons (Optimized)
 const magneticButtons = document.querySelectorAll('.magnetic-btn');
-
 magneticButtons.forEach((btn) => {
   btn.addEventListener('mousemove', (e) => {
     const position = btn.getBoundingClientRect();
-    const x = e.pageX - position.left - position.width / 2;
-    const y = e.pageY - position.top - position.height / 2;
+    const x = e.clientX - position.left - position.width / 2;
+    const y = e.clientY - position.top - position.height / 2;
 
     gsap.to(btn, {
-      x: x * 0.3,
-      y: y * 0.3,
-      duration: 1,
-      ease: 'power3.out',
+      x: x * 0.35,
+      y: y * 0.35,
+      duration: 0.6,
+      ease: 'power2.out',
     });
-    
-    // Expand cursor
-    cursorOutline.style.width = '60px';
-    cursorOutline.style.height = '60px';
-    cursorOutline.style.backgroundColor = 'rgba(203, 168, 106, 0.1)';
   });
 
   btn.addEventListener('mouseleave', () => {
     gsap.to(btn, {
       x: 0,
       y: 0,
-      duration: 1,
+      duration: 0.8,
       ease: 'elastic.out(1, 0.3)',
     });
-    
-    // Reset cursor
-    cursorOutline.style.width = '40px';
-    cursorOutline.style.height = '40px';
-    cursorOutline.style.backgroundColor = 'transparent';
   });
 });
 
@@ -286,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
       issues: 'Needed a digital presence that matched their cutting-edge technology. The existing brand didn\'t communicate the sophisticated, modular nature of their AI solutions.',
       solutions: 'We went with a "Futuristic Dark Mode" aesthetic. Leveraging moving grid backgrounds, animated AI particles, and glowing transitions to bring their product to life.',
       delivery: 'Elevated visual identity, stronger startup positioning, and a premium digital presence that immediately commands authority in the AI space.',
-      link: 'https://aetheronai.online/'
+      link: 'https://aetheronai.in'
     },
     'aetherbuilt-os': {
       title: 'AetherBuilt OS',
@@ -295,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       issues: 'The goal was to present complex SaaS data in an engaging way.',
       solutions: 'We built an OS-inspired layout utilizing modular UI systems, mimicking a real terminal and desktop environment. Terminal-style transitions and depth blur effects simulate interacting with physical software.',
       delivery: 'Achieved strong SaaS positioning with an interactive product presentation, cementing a modern enterprise aesthetic that drives demo bookings.',
-      link: 'https://aether-built-landing-page.vercel.app/'
+      link: 'https://aether-built-website.vercel.app/'
     },
     'ram-industries': {
       title: 'Ram Industries',
@@ -366,4 +426,187 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // A. Mobile Navigation Drawer Toggle
+  const nav = document.querySelector('.nav');
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinksList = document.querySelectorAll('.nav-links a');
+  
+  if (navToggle && nav) {
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('nav-open');
+      if (nav.classList.contains('nav-open')) {
+        lenis.stop(); // Pause smooth scrolling while menu is open
+      } else {
+        lenis.start(); // Resume
+      }
+    });
+    
+    // Close drawer on click of links
+    navLinksList.forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('nav-open');
+        lenis.start();
+      });
+    });
+  }
+
+  // B. Spotlight Card Hover Effect
+  const serviceCards = document.querySelectorAll('.service-card');
+  serviceCards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // C. Project Cost Estimator Logic
+  const pageSlider = document.getElementById('page-count');
+  const pageVal = document.getElementById('page-count-val');
+  const sumBase = document.getElementById('sum-base');
+  const sumPages = document.getElementById('sum-pages');
+  const sumFeatures = document.getElementById('sum-features');
+  const sumTimeline = document.getElementById('sum-timeline');
+  const sumTotal = document.getElementById('sum-total');
+  const bookCalcBtn = document.getElementById('book-calc-btn');
+  
+  if (pageSlider) {
+    let currentType = 'landing';
+    let currentTimeline = 'standard';
+    
+    const typeButtons = document.querySelectorAll('.est-opt');
+    const timelineButtons = document.querySelectorAll('.est-timeline');
+    
+    const featCms = document.getElementById('feat-cms');
+    const featAi = document.getElementById('feat-ai');
+    const featAnimations = document.getElementById('feat-animations');
+    
+    const prices = {
+      landing: { base: 3999, pageRate: 1500 },
+      animated: { base: 12999, pageRate: 2500 },
+      immersive: { base: 29999, pageRate: 4500 }
+    };
+    
+    const calculateTotal = () => {
+      const basePrice = prices[currentType].base;
+      const pageCount = parseInt(pageSlider.value);
+      
+      // Update pages display
+      pageVal.textContent = pageCount === 1 ? "1 Page" : `${pageCount} Pages`;
+      
+      // Compute page cost (first page included in base)
+      const pagesCost = (pageCount - 1) * prices[currentType].pageRate;
+      
+      // Compute features
+      let featuresCost = 0;
+      if (featCms && featCms.checked) featuresCost += 4999;
+      if (featAi && featAi.checked) featuresCost += 6999;
+      if (currentType === 'landing' && featAnimations && featAnimations.checked) {
+        featuresCost += 1500;
+      }
+      
+      const subtotal = basePrice + pagesCost + featuresCost;
+      
+      // Compute urgency multiplier (+25% on subtotal)
+      let timelineCost = 0;
+      if (currentTimeline === 'fast') {
+        timelineCost = Math.round(subtotal * 0.25);
+      }
+      
+      const total = subtotal + timelineCost;
+      
+      // Format to INR Currency
+      const formatINR = (num) => "₹" + num.toLocaleString('en-IN');
+      
+      if (sumBase) sumBase.textContent = formatINR(basePrice);
+      if (sumPages) sumPages.textContent = formatINR(pagesCost);
+      if (sumFeatures) sumFeatures.textContent = formatINR(featuresCost);
+      if (sumTimeline) sumTimeline.textContent = formatINR(timelineCost);
+      if (sumTotal) sumTotal.textContent = formatINR(total);
+      
+      // Prefilled WhatsApp message
+      const textMsg = `Hi K-Studios! I used the Project Estimator on your website and would like to hire you.
+Scope details:
+- Project Type: ${currentType.charAt(0).toUpperCase() + currentType.slice(1)}
+- Pages: ${pageCount}
+- Features: ${[
+        (currentType !== 'landing' || (featAnimations && featAnimations.checked)) ? "Custom GSAP Animations" : "",
+        (featCms && featCms.checked) ? "CMS / Admin Panel" : "",
+        (featAi && featAi.checked) ? "AI Chatbot" : "",
+        "SEO Audit"
+      ].filter(Boolean).join(', ')}
+- Timeline: ${currentTimeline === 'fast' ? "Fast Track (2 weeks)" : "Standard (4-6 weeks)"}
+- Estimated Price: ${formatINR(total)}`;
+      
+      if (bookCalcBtn) {
+        bookCalcBtn.href = `https://wa.me/918928352406?text=${encodeURIComponent(textMsg)}`;
+      }
+    };
+    
+    typeButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        typeButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentType = btn.getAttribute('data-type');
+        
+        if (featAnimations) {
+          if (currentType === 'landing') {
+            featAnimations.disabled = false;
+            featAnimations.checked = false;
+          } else {
+            featAnimations.disabled = true;
+            featAnimations.checked = true;
+          }
+        }
+        calculateTotal();
+      });
+    });
+    
+    timelineButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        timelineButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTimeline = btn.getAttribute('data-time');
+        calculateTotal();
+      });
+    });
+    
+    pageSlider.addEventListener('input', calculateTotal);
+    if (featCms) featCms.addEventListener('change', calculateTotal);
+    if (featAi) featAi.addEventListener('change', calculateTotal);
+    if (featAnimations) featAnimations.addEventListener('change', calculateTotal);
+    
+    calculateTotal();
+  }
+
+  // D. FAQ Accordion Toggle Logic
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    const answer = item.querySelector('.faq-answer');
+    
+    if (question && answer) {
+      question.addEventListener('click', (e) => {
+        e.preventDefault();
+        const isActive = item.classList.contains('active');
+        
+        // Collapse other active accordion items
+        faqItems.forEach(el => {
+          el.classList.remove('active');
+          const ans = el.querySelector('.faq-answer');
+          if (ans) ans.style.maxHeight = null;
+        });
+        
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + "px";
+        }
+      });
+    }
+  });
 });

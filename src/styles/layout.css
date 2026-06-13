@@ -129,9 +129,11 @@
     -webkit-backdrop-filter: blur(15px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 3rem;
+    gap: 2.5rem;
+    padding: 7rem 2rem 3rem;
+    overflow-y: auto;
     z-index: 99;
     transform: translateY(-100%);
     transition: transform 0.6s var(--ease-out-expo);
@@ -1465,7 +1467,7 @@
 }
 
 .est-opt, .est-timeline {
-  flex: 1 1 calc(50% - 0.6rem);
+  flex: 1 1 100%;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--color-text-secondary);
@@ -1479,7 +1481,7 @@
 }
 
 @media (min-width: 576px) {
-  .est-opt {
+  .est-opt, .est-timeline {
     flex: 1;
   }
 }
@@ -1750,4 +1752,15 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+/* Touch device scrolling for screenshots */
+@media (hover: none) {
+  .window-content {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .screenshot-img {
+    position: relative !important;
+  }
 }

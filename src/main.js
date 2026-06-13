@@ -5,6 +5,72 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Web Audio API Sound Synthesizer
+let audioCtx = null;
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+}
+
+function playSound(type) {
+  try {
+    initAudio();
+    if (!audioCtx) return;
+    const now = audioCtx.currentTime;
+    if (type === 'hover') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1200, now);
+      osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+      gain.gain.setValueAtTime(0.015, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } else if (type === 'click') {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(600, now);
+      osc.frequency.exponentialRampToValueAtTime(150, now + 0.15);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + 0.16);
+    } else if (type === 'modal') {
+      const osc1 = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(220, now);
+      osc1.frequency.linearRampToValueAtTime(440, now + 0.4);
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(223, now);
+      osc2.frequency.linearRampToValueAtTime(446, now + 0.4);
+      gain.gain.setValueAtTime(0.001, now);
+      gain.gain.linearRampToValueAtTime(0.05, now + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc1.start(now);
+      osc2.start(now);
+      osc1.stop(now + 0.5);
+      osc2.stop(now + 0.5);
+    }
+  } catch (e) {
+    console.warn('Web Audio API not supported:', e);
+  }
+}
+
 // 1. Initialize Lenis Smooth Scroll
 const lenis = new Lenis({
   duration: 1.2,
@@ -60,6 +126,7 @@ if (cursorDot && cursorOutline) {
   const hoverables = document.querySelectorAll('a, button, .est-opt, .est-timeline, .faq-question');
   hoverables.forEach(el => {
     el.addEventListener('mouseenter', () => {
+      playSound('hover');
       gsap.to(cursorOutline, {
         scale: 1.3,
         borderColor: 'var(--color-accent-gold)',
@@ -84,12 +151,31 @@ if (cursorDot && cursorOutline) {
         duration: 0.2
       });
     });
+
+    el.addEventListener('click', () => {
+      playSound('click');
+    });
   });
 
-  // Custom Cursor VIEWS Hover for Project Mockups
+  // Custom Cursor VIEWS Hover for Project Mockups + Screenshot Hover Scrolling
   const mockups = document.querySelectorAll('.mockup-container');
   mockups.forEach(mockup => {
     mockup.addEventListener('mouseenter', () => {
+      playSound('hover');
+      const img = mockup.querySelector('.screenshot-img');
+      const windowContent = mockup.querySelector('.window-content');
+      if (img && windowContent) {
+        const scrollAmount = img.offsetHeight - windowContent.offsetHeight;
+        if (scrollAmount > 0) {
+          const duration = scrollAmount / 110;
+          gsap.to(img, {
+            y: -scrollAmount,
+            duration: duration,
+            ease: 'power1.inOut',
+            overwrite: 'auto'
+          });
+        }
+      }
       gsap.to(cursorOutline, {
         scale: 2,
         backgroundColor: 'var(--color-accent-gold)',
@@ -107,6 +193,15 @@ if (cursorDot && cursorOutline) {
     });
 
     mockup.addEventListener('mouseleave', () => {
+      const img = mockup.querySelector('.screenshot-img');
+      if (img) {
+        gsap.to(img, {
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out',
+          overwrite: 'auto'
+        });
+      }
       gsap.to(cursorOutline, {
         scale: 1,
         backgroundColor: 'transparent',
@@ -219,16 +314,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Image Parallax within mockup
-    gsap.to(project.querySelector('.mockup-img'), {
-      y: '-10%',
-      ease: 'none',
-      scrollTrigger: {
-        trigger: project,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
+    const mockupImg = project.querySelector('.mockup-img');
+    if (mockupImg) {
+      gsap.to(mockupImg, {
+        y: '-10%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: project,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
   });
 
   // Process Timeline Scroll Animation
@@ -348,6 +446,15 @@ document.addEventListener('DOMContentLoaded', () => {
       delivery: 'Elevated visual identity, stronger startup positioning, and a premium digital presence that immediately commands authority in the AI space.',
       link: 'https://aetheronai.in'
     },
+    'sony-three': {
+      title: 'Sony WH-1000XM6',
+      tag: '3D • WebGL • Sound Design • Immersive',
+      overview: 'A premium 3D exploding showcase designed for Sony\'s flagship headphones, incorporating WebGL particle explosions, custom audio cues, and modular specifications storytelling.',
+      issues: 'Needed a highly interactive, cinematic web experience to capture customer imagination and demonstrate internal hardware configurations during pre-order phase.',
+      solutions: 'We engineered a WebGL product stage with responsive orbit controls, smooth scroll animations, and exploding mechanical components triggered by GSAP timeline controls.',
+      delivery: 'An award-winning experiential showcase page displaying premium hardware, generating high conversion rates and immersive visual storytelling.',
+      link: 'https://sony-three.vercel.app/'
+    },
     'aetherbuilt-os': {
       title: 'AetherBuilt OS',
       tag: 'SaaS • Motion • Product Design',
@@ -390,6 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalLink = document.getElementById('modal-link');
 
     const openModal = (projectId) => {
+      playSound('modal');
       const data = caseStudiesData[projectId];
       if (data) {
         modalTag.textContent = data.tag;
@@ -406,6 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const closeModal = () => {
+      playSound('click');
       modalOverlay.classList.add('hidden');
       lenis.start(); // Resume smooth scrolling
     };
@@ -434,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (navToggle && nav) {
     navToggle.addEventListener('click', () => {
+      playSound('click');
       nav.classList.toggle('nav-open');
       if (nav.classList.contains('nav-open')) {
         lenis.stop(); // Pause smooth scrolling while menu is open
@@ -485,9 +595,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const featAnimations = document.getElementById('feat-animations');
     
     const prices = {
-      landing: { base: 3999, pageRate: 1500 },
-      animated: { base: 12999, pageRate: 2500 },
-      immersive: { base: 29999, pageRate: 4500 }
+      landing: { base: 1999, pageRate: 499 },
+      animated: { base: 6999, pageRate: 999 },
+      immersive: { base: 14999, pageRate: 1499 }
     };
     
     const calculateTotal = () => {
@@ -502,18 +612,18 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Compute features
       let featuresCost = 0;
-      if (featCms && featCms.checked) featuresCost += 4999;
-      if (featAi && featAi.checked) featuresCost += 6999;
+      if (featCms && featCms.checked) featuresCost += 1999;
+      if (featAi && featAi.checked) featuresCost += 2999;
       if (currentType === 'landing' && featAnimations && featAnimations.checked) {
-        featuresCost += 1500;
+        featuresCost += 999;
       }
       
       const subtotal = basePrice + pagesCost + featuresCost;
       
-      // Compute urgency multiplier (+25% on subtotal)
+      // Compute urgency multiplier (+15% on subtotal)
       let timelineCost = 0;
       if (currentTimeline === 'fast') {
-        timelineCost = Math.round(subtotal * 0.25);
+        timelineCost = Math.round(subtotal * 0.15);
       }
       
       const total = subtotal + timelineCost;
@@ -603,8 +713,11 @@ Scope details:
         });
         
         if (!isActive) {
+          playSound('click');
           item.classList.add('active');
           answer.style.maxHeight = answer.scrollHeight + "px";
+        } else {
+          playSound('click');
         }
       });
     }

@@ -1741,3 +1741,13 @@
     transform: none;
   }
 }
+
+/* Screenshot scroll styles */
+.screenshot-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
